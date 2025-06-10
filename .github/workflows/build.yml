@@ -40,6 +40,10 @@ jobs:
         working-directory: app
         run: make build
 
+      - name: Generate coverage report
+        working-directory: app
+        run: make report
+
       - name: Run SonarQube analysis
         working-directory: app
         env:

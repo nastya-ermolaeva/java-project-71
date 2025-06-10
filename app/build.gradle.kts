@@ -52,5 +52,6 @@ sonar {
         property("sonar.projectKey", "nastya-ermolaeva_java-project-71")
         property("sonar.organization", "nastya-ermolaeva")
         property("sonar.host.url", "https://sonarcloud.io")
+        property("sonar.coverage.jacoco.xmlReportPaths", "${buildDir}/reports/jacoco/test/jacocoTestReport.xml")
     }
 }
