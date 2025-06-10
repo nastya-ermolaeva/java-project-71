@@ -10,7 +10,7 @@ public class DifferTest {
 
     @Test
     public void gendiffTest() throws Exception {
-        Path expectedPath = Paths.get("src", "test", "resources", "fixtures", "expected_flat.txt");
+        Path expectedPath = Paths.get("src", "test", "resources", "fixtures", "expected.txt");
         String expected = Files.readString(expectedPath).trim();
 
         Path file1 = Paths.get("src", "test", "resources", "fixtures", "file1.json");
