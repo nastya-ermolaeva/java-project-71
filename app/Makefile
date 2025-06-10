@@ -1,16 +1,13 @@
-.PHONY: build clean rebuild
+.PHONY: build
 
 run-dist:
 	./build/install/app/bin/app
 
 build:
-	./gradlew build
+	./gradlew clean build
 
-clean:
-	./gradlew clean
-
-rebuild:
-	clean build
+install:
+	./gradlew installDist
 
 test:
 	./gradlew test
