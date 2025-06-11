@@ -1,28 +1,21 @@
 package hexlet.code;
 
-import java.util.ArrayList;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.Map;
 import java.util.LinkedHashMap;
-import java.util.Collections;
 import java.io.IOException;
 
 public class Differ {
 
     public static String generate(String filepath1, String filepath2) throws IOException {
 
-        Map<String, Object> data1 = Parse.parseJson(Read.readFile(filepath1));
-        Map<String, Object> data2 = Parse.parseJson(Read.readFile(filepath2));
+        Map<String, Object> data1 = Parse.parse(FileUtils.readFile(filepath1), FileUtils.getFileExtension(filepath1));
+        Map<String, Object> data2 = Parse.parse(FileUtils.readFile(filepath2), FileUtils.getFileExtension(filepath2));
 
-        var keys1 = new ArrayList<String>(data1.keySet());
-        var keys2 = new ArrayList<String>(data2.keySet());
-
-        var allKeys = new ArrayList<String>();
-        allKeys.addAll(keys1);
-        allKeys.addAll(keys2);
-
-        Collections.sort(allKeys);
-
-        var uniqueKeys = allKeys.stream().distinct().toList();
+        Set<String> uniqueKeys = new TreeSet<>();
+        uniqueKeys.addAll(data1.keySet());
+        uniqueKeys.addAll(data2.keySet());
 
         Map<String, Difference> diffs = new LinkedHashMap<>();
 
