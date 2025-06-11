@@ -4,7 +4,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.io.IOException;
 
-public class Read {
+public class FileUtils {
 
     public static Path getPath(String filePath) throws IOException {
         Path path = Path.of(filePath).toAbsolutePath().normalize();
@@ -13,6 +13,15 @@ public class Read {
             throw new IOException("File is not found: " + path);
         }
         return path;
+    }
+
+    public static String getFileExtension(String filePath) {
+        var dotIndex = filePath.lastIndexOf('.');
+
+        if (dotIndex == -1 || dotIndex == filePath.length() - 1) {
+            throw new IllegalArgumentException("Invalid file name or format");
+        }
+        return filePath.substring(dotIndex + 1).toLowerCase();
     }
 
     public static String readFile(String filePath) throws IOException {
