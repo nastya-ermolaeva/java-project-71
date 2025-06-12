@@ -5,10 +5,16 @@ import java.util.Objects;
 public class Difference {
     private final Object oldValue;
     private final Object newValue;
+    private final boolean hasOldKey;
+    private final boolean hasNewKey;
+    private final String status;
 
-    public Difference(Object oldValue, Object newValue) {
+    public Difference(Object oldValue, Object newValue, boolean hasOldKey, boolean hasNewKey) {
         this.oldValue = oldValue;
         this.newValue = newValue;
+        this.hasOldKey = hasOldKey;
+        this.hasNewKey = hasNewKey;
+        this.status = getStatus();
     }
 
     public Object getOldValue() {
@@ -19,19 +25,19 @@ public class Difference {
         return newValue;
     }
 
-    public boolean isChanged() {
-        return !Objects.equals(oldValue, newValue);
-    }
+    public String getStatus() {
+        if (!hasOldKey && hasNewKey) {
+            return "added";
+        }
 
-    public boolean isAdded() {
-        return oldValue == null && newValue != null;
-    }
+        if (hasOldKey && !hasNewKey) {
+            return "removed";
+        }
 
-    public boolean isRemoved() {
-        return oldValue != null && newValue == null;
-    }
+        if (Objects.equals(oldValue, newValue)) {
+            return "unchanged";
+        }
 
-    public boolean isUnchanged() {
-        return Objects.equals(oldValue, newValue);
+        return "changed";
     }
 }

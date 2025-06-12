@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.Map;
-
+import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -15,18 +15,24 @@ public class ParseTest {
         String json = """
                {
                   "host": "hexlet.io",
-                  "timeout": 50,
-                  "proxy": "123.234.53.22",
-                  "follow": false
+                  "settings": {
+                    "timeout": 50,
+                    "proxy": "123.234.53.22"
+                  },
+                  "features": ["follow", "verbose"]
                }
             """;
 
         Map<String, Object> result = Parse.parse(json, "json");
 
         assertEquals("hexlet.io", result.get("host"));
-        assertEquals(50, result.get("timeout"));
-        assertEquals("123.234.53.22", result.get("proxy"));
-        assertEquals(false, result.get("follow"));
+
+        Map<String, Object> settings = (Map<String, Object>) result.get("settings");
+        assertEquals(50, settings.get("timeout"));
+        assertEquals("123.234.53.22", settings.get("proxy"));
+
+        List<String> features = (List<String>) result.get("features");
+        assertEquals(List.of("follow", "verbose"), features);
     }
 
     @Test
@@ -40,17 +46,24 @@ public class ParseTest {
     public void parseYamlTestSuccess() throws IOException {
         String yaml = """
                 host: hexlet.io
-                timeout: 50
-                proxy: 123.234.53.22
-                follow: false
+                settings:
+                  timeout: 50
+                  proxy: 123.234.53.22
+                features:
+                  - follow
+                  - verbose
                 """;
 
         Map<String, Object> result = Parse.parse(yaml, "yml");
 
         assertEquals("hexlet.io", result.get("host"));
-        assertEquals(50, result.get("timeout"));
-        assertEquals("123.234.53.22", result.get("proxy"));
-        assertEquals(false, result.get("follow"));
+
+        Map<String, Object> settings = (Map<String, Object>) result.get("settings");
+        assertEquals(50, settings.get("timeout"));
+        assertEquals("123.234.53.22", settings.get("proxy"));
+
+        List<String> features = (List<String>) result.get("features");
+        assertEquals(List.of("follow", "verbose"), features);
     }
 
     @Test

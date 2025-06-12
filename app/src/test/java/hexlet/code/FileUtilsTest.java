@@ -12,7 +12,7 @@ public class FileUtilsTest {
 
     @Test
     public void readJsonFileTestSuccess() throws IOException {
-        String filePath = "src/test/resources/fixtures/file1.json";
+        String filePath = "src/test/resources/fixtures/nested/file1.json";
 
         String expected = Files.readString(Path.of(filePath)).trim();
         String actual = FileUtils.readFile(filePath);
@@ -22,7 +22,7 @@ public class FileUtilsTest {
 
     @Test
     public void readYamlFileTestSuccess() throws IOException {
-        String filePath = "src/test/resources/fixtures/file1.yml";
+        String filePath = "src/test/resources/fixtures/nested/file1.yml";
 
         String expected = Files.readString(Path.of(filePath)).trim();
         String actual = FileUtils.readFile(filePath);
@@ -43,10 +43,10 @@ public class FileUtilsTest {
 
     @Test
     public void getFileExtensionSuccess() {
-        assertEquals("json", FileUtils.getFileExtension("src/test/resources/fixtures/file1.json"));
-        assertEquals("yml", FileUtils.getFileExtension("src/test/resources/fixtures/file1.yml"));
+        assertEquals("json", FileUtils.getFileExtension("src/test/resources/fixtures/nested/file1.json"));
+        assertEquals("yml", FileUtils.getFileExtension("src/test/resources/fixtures/flat/file1.yml"));
         assertEquals("yaml", FileUtils.getFileExtension("multi.dots.file.yaml"));
-        assertEquals("txt", FileUtils.getFileExtension("src/test/resources/fixtures/expected.txt"));
+        assertEquals("txt", FileUtils.getFileExtension("src/test/resources/fixtures/nested/expected.txt"));
     }
 
     @Test

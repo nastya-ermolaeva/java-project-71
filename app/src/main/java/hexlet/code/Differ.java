@@ -9,6 +9,10 @@ import java.io.IOException;
 public class Differ {
 
     public static String generate(String filepath1, String filepath2) throws IOException {
+        return generate(filepath1, filepath2, "stylish");
+    }
+
+    public static String generate(String filepath1, String filepath2, String format) throws IOException {
 
         Map<String, Object> data1 = Parse.parse(FileUtils.readFile(filepath1), FileUtils.getFileExtension(filepath1));
         Map<String, Object> data2 = Parse.parse(FileUtils.readFile(filepath2), FileUtils.getFileExtension(filepath2));
@@ -21,11 +25,16 @@ public class Differ {
 
         for (var key : uniqueKeys) {
 
-            Object value1 = data1.get(key);
-            Object value2 = data2.get(key);
-            diffs.put(key, new Difference(value1, value2));
+            boolean oldKeyExists = data1.containsKey(key);
+            boolean newKeyExists = data2.containsKey(key);
+            Object value1 = oldKeyExists ? data1.get(key) : null;
+            Object value2 = newKeyExists ? data2.get(key) : null;
+            diffs.put(key, new Difference(value1, value2, oldKeyExists, newKeyExists));
         }
 
-        return Format.format(diffs);
+        return switch (format) {
+            case "stylish" -> Format.stylish(diffs);
+            default -> Format.stylish(diffs);
+        };
     }
 }
