@@ -14,8 +14,8 @@ public class Differ {
 
     public static String generate(String filepath1, String filepath2, String format) throws IOException {
 
-        Map<String, Object> data1 = Parse.parse(FileUtils.readFile(filepath1), FileUtils.getFileExtension(filepath1));
-        Map<String, Object> data2 = Parse.parse(FileUtils.readFile(filepath2), FileUtils.getFileExtension(filepath2));
+        Map<String, Object> data1 = Parser.parse(FileUtils.readFile(filepath1), FileUtils.getFileExtension(filepath1));
+        Map<String, Object> data2 = Parser.parse(FileUtils.readFile(filepath2), FileUtils.getFileExtension(filepath2));
 
         Set<String> uniqueKeys = new TreeSet<>();
         uniqueKeys.addAll(data1.keySet());
@@ -32,9 +32,6 @@ public class Differ {
             diffs.put(key, new Difference(value1, value2, oldKeyExists, newKeyExists));
         }
 
-        return switch (format) {
-            case "stylish" -> Format.stylish(diffs);
-            default -> Format.stylish(diffs);
-        };
+        return Formatter.format(diffs, format);
     }
 }

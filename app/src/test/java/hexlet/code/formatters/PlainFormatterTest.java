@@ -1,4 +1,4 @@
-package hexlet.code;
+package hexlet.code.formatters;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -10,12 +10,13 @@ import java.util.TreeMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.io.IOException;
+import hexlet.code.Difference;
 
-public class FormatTest {
+public class PlainFormatterTest {
 
     @Test
     public void formatWithNestedStructuresTest() throws IOException {
-        Path expectedPath = Paths.get("src", "test", "resources", "fixtures", "nested", "expected.txt");
+        Path expectedPath = Paths.get("src", "test", "resources", "fixtures", "nested", "expected_plain.txt");
         String expected = Files.readString(expectedPath).trim();
 
         Map<String, Difference> diffs = new TreeMap<>();
@@ -41,36 +42,34 @@ public class FormatTest {
         diffs.put("setting2", new Difference(200, 300, true, true));
         diffs.put("setting3", new Difference(true, "none", true, true));
 
-        String actual = Format.stylish(diffs);
+        String actual = PlainFormatter.format(diffs);
         assertEquals(expected.trim(), actual.trim());
     }
 
     @Test
-    public void testExtraordinaryCases() {
+    public void formatWithExtraordinaryCasesTest() {
         Map<String, Difference> diffs = new TreeMap<>();
-        diffs.put("CAPS", new Difference(1, 2, true, true));
-        diffs.put("key", new Difference("12", 12, true, true));
-        diffs.put("  spaced", new Difference("one", "two", true, true));
+
+        diffs.put("numbers", new Difference(10, "10", true, true));
+        diffs.put("nullTest", new Difference(null, "nonNull", true, true));
+        diffs.put("removedKey", new Difference("gone", null, true, false));
 
         String expected = """
-            {
-              -   spaced: one
-              +   spaced: two
-              - CAPS: 1
-              + CAPS: 2
-              - key: 12
-              + key: 12
-            }""";
+            Property 'nullTest' was updated. From null to 'nonNull'
+            Property 'numbers' was updated. From 10 to '10'
+            Property 'removedKey' was removed
+            """;
 
-        String actual = Format.stylish(diffs);
+        String actual = PlainFormatter.format(diffs);
         assertEquals(expected.trim(), actual.trim());
     }
+
 
     @Test
     public void formatEmptyDiffTest() {
         Map<String, Difference> diffs = new LinkedHashMap<>();
-        String expected = "{\n}";
-        String actual = Format.stylish(diffs);
+        String expected = "";
+        String actual = PlainFormatter.format(diffs);
         assertEquals(expected.trim(), actual.trim());
     }
 }

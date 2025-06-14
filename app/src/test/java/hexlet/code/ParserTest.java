@@ -8,7 +8,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class ParseTest {
+public class ParserTest {
 
     @Test
     public void parseJsonTestSuccess() throws IOException {
@@ -23,7 +23,7 @@ public class ParseTest {
                }
             """;
 
-        Map<String, Object> result = Parse.parse(json, "json");
+        Map<String, Object> result = Parser.parse(json, "json");
 
         assertEquals("hexlet.io", result.get("host"));
 
@@ -39,7 +39,7 @@ public class ParseTest {
     void parseJsonFailTest() {
         String invalidJson = "{ invalid json }";
 
-        assertThrows(IOException.class, () -> Parse.parse(invalidJson, "json"));
+        assertThrows(IOException.class, () -> Parser.parse(invalidJson, "json"));
     }
 
     @Test
@@ -54,7 +54,7 @@ public class ParseTest {
                   - verbose
                 """;
 
-        Map<String, Object> result = Parse.parse(yaml, "yml");
+        Map<String, Object> result = Parser.parse(yaml, "yml");
 
         assertEquals("hexlet.io", result.get("host"));
 
@@ -70,13 +70,13 @@ public class ParseTest {
     public void parseYamlFailTest() {
         String invalidYaml = "invalid: :yaml: hex";
 
-        assertThrows(IOException.class, () -> Parse.parse(invalidYaml, "yaml"));
+        assertThrows(IOException.class, () -> Parser.parse(invalidYaml, "yaml"));
     }
 
     @Test
     public void parseUnsupportedFormatTest() {
         String random = "some random string";
 
-        assertThrows(IllegalArgumentException.class, () -> Parse.parse(random, "txt"));
+        assertThrows(IllegalArgumentException.class, () -> Parser.parse(random, "txt"));
     }
 }

@@ -1,10 +1,11 @@
-package hexlet.code;
+package hexlet.code.formatters;
 
+import hexlet.code.Difference;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class Format {
-    public static String stylish(Map<String, Difference> diffs) {
+public class StylishFormatter {
+    public static String format(Map<String, Difference> diffs) {
         var lines = new ArrayList<String>();
         lines.add("{");
 

@@ -6,7 +6,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import java.io.IOException;
 
-public class Parse {
+public class Parser {
 
     private static final ObjectMapper JSON_MAPPER = new ObjectMapper();
     private static final ObjectMapper YAML_MAPPER = new ObjectMapper(new YAMLFactory());
