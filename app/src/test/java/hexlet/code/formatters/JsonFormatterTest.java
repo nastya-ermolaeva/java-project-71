@@ -2,6 +2,8 @@ package hexlet.code.formatters;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.Files;
@@ -9,14 +11,15 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.io.IOException;
 import hexlet.code.Difference;
 
-class PlainFormatterTest {
+class JsonFormatterTest {
+
+    private static final ObjectMapper MAPPER = new ObjectMapper();
 
     @Test
-    void formatWithNestedStructuresTest() throws IOException {
-        Path expectedPath = Paths.get("src", "test", "resources", "fixtures", "nested", "expected_plain.txt");
+    void formatWithNestedStructuresTest() throws Exception {
+        Path expectedPath = Paths.get("src", "test", "resources", "fixtures", "nested", "expected_json.txt");
         String expected = Files.readString(expectedPath).trim();
 
         Map<String, Difference> diffs = new TreeMap<>();
@@ -42,34 +45,15 @@ class PlainFormatterTest {
         diffs.put("setting2", new Difference(200, 300, true, true));
         diffs.put("setting3", new Difference(true, "none", true, true));
 
-        String actual = PlainFormatter.format(diffs);
-        assertEquals(expected.trim(), actual.trim());
+        String actual = JsonFormatter.format(diffs).trim();
+        assertEquals(MAPPER.readTree(expected), MAPPER.readTree(actual));
     }
 
     @Test
-    void formatWithExtraordinaryCasesTest() {
-        Map<String, Difference> diffs = new TreeMap<>();
-
-        diffs.put("numbers", new Difference(10, "10", true, true));
-        diffs.put("nullTest", new Difference(null, "nonNull", true, true));
-        diffs.put("removedKey", new Difference("gone", null, true, false));
-
-        String expected = """
-            Property 'nullTest' was updated. From null to 'nonNull'
-            Property 'numbers' was updated. From 10 to '10'
-            Property 'removedKey' was removed
-            """;
-
-        String actual = PlainFormatter.format(diffs);
-        assertEquals(expected.trim(), actual.trim());
-    }
-
-
-    @Test
-    void formatEmptyDiffTest() {
+    void formatEmptyDiffTest() throws JsonProcessingException {
         Map<String, Difference> diffs = new LinkedHashMap<>();
-        String expected = "";
-        String actual = PlainFormatter.format(diffs);
-        assertEquals(expected.trim(), actual.trim());
+        String expected = "{}";
+        String actual = JsonFormatter.format(diffs);
+        assertEquals(MAPPER.readTree(expected), MAPPER.readTree(actual));
     }
 }

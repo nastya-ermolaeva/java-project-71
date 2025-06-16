@@ -12,10 +12,10 @@ import java.util.List;
 import java.io.IOException;
 import hexlet.code.Difference;
 
-public class StylishFormatterTest {
+class StylishFormatterTest {
 
     @Test
-    public void formatWithNestedStructuresTest() throws IOException {
+    void formatWithNestedStructuresTest() throws IOException {
         Path expectedPath = Paths.get("src", "test", "resources", "fixtures", "nested", "expected_stylish.txt");
         String expected = Files.readString(expectedPath).trim();
 
@@ -47,7 +47,7 @@ public class StylishFormatterTest {
     }
 
     @Test
-    public void testExtraordinaryCases() {
+    void testExtraordinaryCases() {
         Map<String, Difference> diffs = new TreeMap<>();
         diffs.put("CAPS", new Difference(1, 2, true, true));
         diffs.put("key", new Difference("12", 12, true, true));
@@ -68,7 +68,7 @@ public class StylishFormatterTest {
     }
 
     @Test
-    public void formatEmptyDiffTest() {
+    void formatEmptyDiffTest() {
         Map<String, Difference> diffs = new LinkedHashMap<>();
         String expected = "{\n}";
         String actual = StylishFormatter.format(diffs);

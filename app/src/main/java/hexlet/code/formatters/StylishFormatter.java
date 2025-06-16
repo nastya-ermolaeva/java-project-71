@@ -4,7 +4,12 @@ import hexlet.code.Difference;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class StylishFormatter {
+public final class StylishFormatter {
+
+    private StylishFormatter() {
+        // private constructor prevents from creating this class examples (Sonar made me do it)
+    }
+
     public static String format(Map<String, Difference> diffs) {
         var lines = new ArrayList<String>();
         lines.add("{");

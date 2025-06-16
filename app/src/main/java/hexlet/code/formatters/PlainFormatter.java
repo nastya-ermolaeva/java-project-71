@@ -5,7 +5,11 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class PlainFormatter {
+public final class PlainFormatter {
+
+    private PlainFormatter() {
+        // private constructor prevents from creating this class examples (Sonar made me do it)
+    }
 
     public static String format(Map<String, Difference> diffs) {
         List<String> lines = new ArrayList<>();
@@ -21,7 +25,7 @@ public class PlainFormatter {
                 case "added" -> lines.add("Property '" + key + "' was added with value: " + newValue);
                 case "removed" -> lines.add("Property '" + key + "' was removed");
                 case "changed" -> lines.add("Property '" + key + "' was updated. From " + oldValue + " to " + newValue);
-                case "unchanged" -> { }
+                case "unchanged" -> { } // doesn't need to be printed on the screen
                 default -> throw new IllegalStateException("Unexpected status: " + status);
             }
         }

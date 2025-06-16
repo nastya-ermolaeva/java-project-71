@@ -4,7 +4,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.io.IOException;
 
-public class FileUtils {
+public final class FileUtils {
+
+    private FileUtils() {
+        // private constructor prevents from creating this class examples (Sonar made me do it)
+    }
 
     public static Path getPath(String filePath) throws IOException {
         Path path = Path.of(filePath).toAbsolutePath().normalize();

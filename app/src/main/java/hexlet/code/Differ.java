@@ -6,7 +6,11 @@ import java.util.Map;
 import java.util.LinkedHashMap;
 import java.io.IOException;
 
-public class Differ {
+public final class Differ {
+
+    private Differ() {
+        // private constructor prevents from creating this class examples (Sonar made me do it)
+    }
 
     public static String generate(String filepath1, String filepath2) throws IOException {
         return generate(filepath1, filepath2, "stylish");

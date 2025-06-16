@@ -8,10 +8,10 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class ParserTest {
+class ParserTest {
 
     @Test
-    public void parseJsonTestSuccess() throws IOException {
+    void parseJsonTestSuccess() throws IOException {
         String json = """
                {
                   "host": "hexlet.io",
@@ -43,7 +43,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseYamlTestSuccess() throws IOException {
+    void parseYamlTestSuccess() throws IOException {
         String yaml = """
                 host: hexlet.io
                 settings:
@@ -67,14 +67,14 @@ public class ParserTest {
     }
 
     @Test
-    public void parseYamlFailTest() {
+    void parseYamlFailTest() {
         String invalidYaml = "invalid: :yaml: hex";
 
         assertThrows(IOException.class, () -> Parser.parse(invalidYaml, "yaml"));
     }
 
     @Test
-    public void parseUnsupportedFormatTest() {
+    void parseUnsupportedFormatTest() {
         String random = "some random string";
 
         assertThrows(IllegalArgumentException.class, () -> Parser.parse(random, "txt"));

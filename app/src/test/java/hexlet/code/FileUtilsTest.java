@@ -8,10 +8,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.io.IOException;
 
-public class FileUtilsTest {
+class FileUtilsTest {
 
     @Test
-    public void readJsonFileTestSuccess() throws IOException {
+    void readJsonFileTestSuccess() throws IOException {
         String filePath = "src/test/resources/fixtures/nested/file1.json";
 
         String expected = Files.readString(Path.of(filePath)).trim();
@@ -21,7 +21,7 @@ public class FileUtilsTest {
     }
 
     @Test
-    public void readYamlFileTestSuccess() throws IOException {
+    void readYamlFileTestSuccess() throws IOException {
         String filePath = "src/test/resources/fixtures/nested/file1.yml";
 
         String expected = Files.readString(Path.of(filePath)).trim();
@@ -31,7 +31,7 @@ public class FileUtilsTest {
     }
 
     @Test
-    public void fileNotFoundTest() {
+    void fileNotFoundTest() {
         String invalidPath = "src/test/resources/fixtures/nonexistent.json";
 
         IOException exception = assertThrows(IOException.class, () -> {
@@ -42,7 +42,7 @@ public class FileUtilsTest {
     }
 
     @Test
-    public void getFileExtensionSuccess() {
+    void getFileExtensionSuccess() {
         assertEquals("json", FileUtils.getFileExtension("src/test/resources/fixtures/nested/file1.json"));
         assertEquals("yml", FileUtils.getFileExtension("src/test/resources/fixtures/flat/file1.yml"));
         assertEquals("yaml", FileUtils.getFileExtension("multi.dots.file.yaml"));
@@ -50,7 +50,7 @@ public class FileUtilsTest {
     }
 
     @Test
-    public void getFileExtensionFailTest() {
+    void getFileExtensionFailTest() {
         assertThrows(IllegalArgumentException.class, () -> FileUtils.getFileExtension("filewithnoformat"));
         assertThrows(IllegalArgumentException.class, () -> FileUtils.getFileExtension("fileendswithdot."));
     }

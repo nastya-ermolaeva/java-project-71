@@ -2,6 +2,7 @@ package hexlet.code;
 
 import hexlet.code.formatters.StylishFormatter;
 import hexlet.code.formatters.PlainFormatter;
+import hexlet.code.formatters.JsonFormatter;
 import org.junit.jupiter.api.Test;
 import java.util.Map;
 import java.util.LinkedHashMap;
@@ -9,10 +10,10 @@ import java.util.LinkedHashMap;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class FormatterTest {
+class FormatterTest {
 
     @Test
-    public void testStylishFormatter() {
+    void testStylishFormatter() throws Exception {
         Map<String, Difference> diffs = new LinkedHashMap<>();
         diffs.put("key", new Difference("apple", "pear", true, true));
 
@@ -23,7 +24,7 @@ public class FormatterTest {
     }
 
     @Test
-    public void testPlainFormatter() {
+    void testPlainFormatter() throws Exception {
         Map<String, Difference> diffs = new LinkedHashMap<>();
         diffs.put("key", new Difference("watermelon", "melon", true, true));
 
@@ -34,7 +35,18 @@ public class FormatterTest {
     }
 
     @Test
-    public void testInvalidFormat() {
+    void testJsonFormatter() throws Exception {
+        Map<String, Difference> diffs = new LinkedHashMap<>();
+        diffs.put("key", new Difference("sugar", "salt", true, true));
+
+        String expected = JsonFormatter.format(diffs);
+        String actual = Formatter.format(diffs, "json");
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testInvalidFormat() {
         Map<String, Difference> diffs = new LinkedHashMap<>();
         diffs.put("key", new Difference("bread", "milk", true, true));
 

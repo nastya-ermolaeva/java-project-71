@@ -6,7 +6,11 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import java.io.IOException;
 
-public class Parser {
+public final class Parser {
+
+    private Parser() {
+        // private constructor prevents from creating this class examples (Sonar made me do it)
+    }
 
     private static final ObjectMapper JSON_MAPPER = new ObjectMapper();
     private static final ObjectMapper YAML_MAPPER = new ObjectMapper(new YAMLFactory());

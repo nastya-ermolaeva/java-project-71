@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.Map;
 import java.util.List;
 
-public class DifferenceTest {
+class DifferenceTest {
 
     @Test
     void testChangedMaps() {
