@@ -28,3 +28,12 @@ Difference Generator is a simple command-line tool that compares two configurati
 [Nested JSON](https://asciinema.org/a/7ibZVnHESrFMY2HNkExl0NJkv)
 
 [Nested YAML](https://asciinema.org/a/bm3KITUEk4SSibnjGzOUM4sl5)
+* In Json Format
+
+[Flat JSON](https://asciinema.org/a/GP492YQLF7NtyxWi3PCOpdSkK)
+
+[Flat YAML](https://asciinema.org/a/hWa5SHrKVaWDq6t1fkA3BKRsP)
+
+[Nested JSON](https://asciinema.org/a/Fb8rXtFsI1W2SPvHMhqNWOPLS)
+
+[Nested YAML](https://asciinema.org/a/LBEywDx7XwhhsZlCCk2rQZn7w)
