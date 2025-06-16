@@ -4,7 +4,7 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Difference {
+public final class Difference {
     private final Object oldValue;
     private final Object newValue;
     private final boolean hasOldKey;

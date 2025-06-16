@@ -7,28 +7,27 @@ import java.util.List;
 
 class DifferenceTest {
 
+    private static final Map<String, Object> OLD_VAL = Map.of("apple", 1, "banana", 2);
+    private static final Map<String, Object> NEW_VAL = Map.of("cucumber", 1, "banana", 3);
+    private static final List<Integer> LIST = List.of(1, 2, 3); // auto hexlet-check made me do it
+
     @Test
     void testChangedMaps() {
-        Map<String, Object> oldValue = Map.of("apple", 1, "banana", 2);
-        Map<String, Object> newValue = Map.of("cucumber", 1, "banana", 3);
-
-        Difference diff = new Difference(oldValue, newValue, true, true);
+        Difference diff = new Difference(OLD_VAL, NEW_VAL, true, true);
         assertEquals("changed", diff.getStatus());
-        assertEquals(oldValue, diff.getOldValue());
-        assertEquals(newValue, diff.getNewValue());
+        assertEquals(OLD_VAL, diff.getOldValue());
+        assertEquals(NEW_VAL, diff.getNewValue());
     }
 
     @Test
     void testUnchangedLists() {
-        List<Integer> value = List.of(1, 2, 3);
-        Difference diff = new Difference(value, value, true, true);
+        Difference diff = new Difference(LIST, LIST, true, true);
         assertEquals("unchanged", diff.getStatus());
     }
 
     @Test
     void testAddedMap() {
-        Map<String, Object> newValue = Map.of("pear", true, "watermelon", 10);
-        Difference diff = new Difference(null, newValue, false, true);
+        Difference diff = new Difference(null, NEW_VAL, false, true);
         assertEquals("added", diff.getStatus());
     }
 

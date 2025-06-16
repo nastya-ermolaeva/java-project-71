@@ -10,6 +10,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ParserTest {
 
+    private static final int TIMEOUT_VAL = 50; // auto hexlet-check made me do it
+
     @Test
     void parseJsonTestSuccess() throws IOException {
         String json = """
@@ -28,7 +30,7 @@ class ParserTest {
         assertEquals("hexlet.io", result.get("host"));
 
         Map<String, Object> settings = (Map<String, Object>) result.get("settings");
-        assertEquals(50, settings.get("timeout"));
+        assertEquals(TIMEOUT_VAL, settings.get("timeout"));
         assertEquals("123.234.53.22", settings.get("proxy"));
 
         List<String> features = (List<String>) result.get("features");
@@ -59,7 +61,7 @@ class ParserTest {
         assertEquals("hexlet.io", result.get("host"));
 
         Map<String, Object> settings = (Map<String, Object>) result.get("settings");
-        assertEquals(50, settings.get("timeout"));
+        assertEquals(TIMEOUT_VAL, settings.get("timeout"));
         assertEquals("123.234.53.22", settings.get("proxy"));
 
         List<String> features = (List<String>) result.get("features");
