@@ -36,7 +36,7 @@ class StylishFormatterTest {
         diffs.put("chars2", new Difference(List.of('d', 'e', 'f'), false, true, true));
         diffs.put("checked", new Difference(false, true, true, true));
         diffs.put("default", new Difference(null, List.of("value1", "value2"), true, true));
-        diffs.put("id", new Difference(45, null, true, true));
+        diffs.put("id", new Difference(ID_OLD, null, true, true));
         diffs.put("key1", new Difference("value1", null, true, false));
         diffs.put("key2", new Difference(null, "value2", false, true));
         diffs.put("numbers1", new Difference(NUMBERS1_VAL, NUMBERS1_VAL, true, true));
