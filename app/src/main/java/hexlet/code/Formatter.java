@@ -3,6 +3,7 @@ package hexlet.code;
 import hexlet.code.formatters.StylishFormatter;
 import hexlet.code.formatters.PlainFormatter;
 import hexlet.code.formatters.JsonFormatter;
+import hexlet.code.diff.Difference;
 import java.util.Map;
 import com.fasterxml.jackson.core.JsonProcessingException;
 

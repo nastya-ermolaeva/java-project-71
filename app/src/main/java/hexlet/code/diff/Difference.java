@@ -1,4 +1,4 @@
-package hexlet.code;
+package hexlet.code.diff;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -38,17 +38,17 @@ public final class Difference {
     @JsonProperty("status")
     public String getStatus() {
         if (!hasOldKey && hasNewKey) {
-            return "added";
+            return Status.ADDED;
         }
 
         if (hasOldKey && !hasNewKey) {
-            return "removed";
+            return Status.REMOVED;
         }
 
         if (Objects.equals(oldValue, newValue)) {
-            return "unchanged";
+            return Status.UNCHANGED;
         }
 
-        return "changed";
+        return Status.CHANGED;
     }
 }

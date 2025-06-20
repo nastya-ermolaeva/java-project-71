@@ -10,7 +10,7 @@ import java.util.TreeMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.io.IOException;
-import hexlet.code.Difference;
+import hexlet.code.diff.Difference;
 
 class PlainFormatterTest {
 

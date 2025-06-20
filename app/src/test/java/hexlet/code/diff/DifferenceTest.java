@@ -1,4 +1,4 @@
-package hexlet.code;
+package hexlet.code.diff;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,7 +14,7 @@ class DifferenceTest {
     @Test
     void testChangedMaps() {
         Difference diff = new Difference(OLD_VAL, NEW_VAL, true, true);
-        assertEquals("changed", diff.getStatus());
+        assertEquals(Status.CHANGED, diff.getStatus());
         assertEquals(OLD_VAL, diff.getOldValue());
         assertEquals(NEW_VAL, diff.getNewValue());
     }
@@ -22,20 +22,20 @@ class DifferenceTest {
     @Test
     void testUnchangedLists() {
         Difference diff = new Difference(LIST, LIST, true, true);
-        assertEquals("unchanged", diff.getStatus());
+        assertEquals(Status.UNCHANGED, diff.getStatus());
     }
 
     @Test
     void testAddedMap() {
         Difference diff = new Difference(null, NEW_VAL, false, true);
-        assertEquals("added", diff.getStatus());
+        assertEquals(Status.ADDED, diff.getStatus());
     }
 
     @Test
     void testRemovedList() {
         List<String> oldValue = List.of("one", "two", "three");
         Difference diff = new Difference(oldValue, null, true, false);
-        assertEquals("removed", diff.getStatus());
+        assertEquals(Status.REMOVED, diff.getStatus());
     }
 
     @Test
@@ -43,30 +43,30 @@ class DifferenceTest {
         List<Character> oldValue = List.of('a', 'b', 'c');
         boolean newValue = false;
         Difference diff = new Difference(oldValue, newValue, true, true);
-        assertEquals("changed", diff.getStatus());
+        assertEquals(Status.CHANGED, diff.getStatus());
     }
 
     @Test
     void testNullWithBothKeysPresent() {
         Difference diff = new Difference(null, null, true, true);
-        assertEquals("unchanged", diff.getStatus());
+        assertEquals(Status.UNCHANGED, diff.getStatus());
     }
 
     @Test
     void testNullOnlyNewKey() {
         Difference diff = new Difference(null, null, false, true);
-        assertEquals("added", diff.getStatus());
+        assertEquals(Status.ADDED, diff.getStatus());
     }
 
     @Test
     void testNullOnlyOldKey() {
         Difference diff = new Difference(null, null, true, false);
-        assertEquals("removed", diff.getStatus());
+        assertEquals(Status.REMOVED, diff.getStatus());
     }
 
     @Test
     void testNullNoKeys() {
         Difference diff = new Difference(null, null, false, false);
-        assertEquals("unchanged", diff.getStatus());
+        assertEquals(Status.UNCHANGED, diff.getStatus());
     }
 }

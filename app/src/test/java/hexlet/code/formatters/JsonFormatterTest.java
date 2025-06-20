@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.LinkedHashMap;
 import java.util.List;
-import hexlet.code.Difference;
+import hexlet.code.diff.Difference;
 
 class JsonFormatterTest {
 

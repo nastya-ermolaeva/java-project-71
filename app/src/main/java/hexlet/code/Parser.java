@@ -15,11 +15,11 @@ public final class Parser {
     private static final ObjectMapper JSON_MAPPER = new ObjectMapper();
     private static final ObjectMapper YAML_MAPPER = new ObjectMapper(new YAMLFactory());
 
-    public static Map<String, Object> parse(String content, String fileExtension) throws IOException {
-        return switch (fileExtension.toLowerCase()) {
+    public static Map<String, Object> parse(String content, String dataFormat) throws IOException {
+        return switch (dataFormat.toLowerCase()) {
             case "json" -> JSON_MAPPER.readValue(content, new TypeReference<Map<String, Object>>() { });
             case "yml", "yaml" -> YAML_MAPPER.readValue(content, new TypeReference<Map<String, Object>>() { });
-            default -> throw new IllegalArgumentException("Unsupported file format: " + fileExtension);
+            default -> throw new IllegalArgumentException("Unsupported data format: " + dataFormat);
         };
     }
 }

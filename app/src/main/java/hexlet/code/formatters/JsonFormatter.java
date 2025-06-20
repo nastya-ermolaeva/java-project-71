@@ -2,7 +2,7 @@ package hexlet.code.formatters;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import hexlet.code.Difference;
+import hexlet.code.diff.Difference;
 import java.util.Map;
 
 public final class JsonFormatter {

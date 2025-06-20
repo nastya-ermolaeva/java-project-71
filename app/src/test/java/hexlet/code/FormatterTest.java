@@ -6,7 +6,7 @@ import hexlet.code.formatters.JsonFormatter;
 import org.junit.jupiter.api.Test;
 import java.util.Map;
 import java.util.LinkedHashMap;
-
+import hexlet.code.diff.Difference;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

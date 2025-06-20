@@ -12,19 +12,31 @@ import java.io.IOException;
 class DifferTest {
 
     @Test
-    void gendiffJsonYamlTest() throws Exception {
-        Path expectedPath = Paths.get("src", "test", "resources", "fixtures", "nested", "expected_stylish.txt");
+    void gendiffJsonInJsonFormatTest() throws Exception {
+        Path expectedPath = Paths.get("src", "test", "resources", "fixtures", "nested", "expected_json.txt");
         String expected = Files.readString(expectedPath).trim();
 
         Path file1 = Paths.get("src", "test", "resources", "fixtures", "nested", "file1.json");
-        Path file2 = Paths.get("src", "test", "resources", "fixtures", "nested", "file2.yml");
-        String actual = Differ.generate(file1.toString(), file2.toString()).trim();
+        Path file2 = Paths.get("src", "test", "resources", "fixtures", "nested", "file2.json");
+        String actual = Differ.generate(file1.toString(), file2.toString(), "json").trim();
 
         assertEquals(expected, actual);
     }
 
     @Test
-    void gendiffPlainFormatTest() throws Exception {
+    void gendiffJsonInStylishFormatTest() throws Exception {
+        Path expectedPath = Paths.get("src", "test", "resources", "fixtures", "nested", "expected_stylish.txt");
+        String expected = Files.readString(expectedPath).trim();
+
+        Path file1 = Paths.get("src", "test", "resources", "fixtures", "nested", "file1.json");
+        Path file2 = Paths.get("src", "test", "resources", "fixtures", "nested", "file2.json");
+        String actual = Differ.generate(file1.toString(), file2.toString(), "stylish").trim();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void gendiffJsonInPlainFormatTest() throws Exception {
         Path expectedPath = Paths.get("src", "test", "resources", "fixtures", "nested", "expected_plain.txt");
         String expected = Files.readString(expectedPath).trim();
 
@@ -36,7 +48,31 @@ class DifferTest {
     }
 
     @Test
-    void gendiffStylishFormatTest() throws Exception {
+    void gendiffJsonInDefaultFormatTest() throws Exception {
+        Path expectedPath = Paths.get("src", "test", "resources", "fixtures", "nested", "expected_stylish.txt");
+        String expected = Files.readString(expectedPath).trim();
+
+        Path file1 = Paths.get("src", "test", "resources", "fixtures", "nested", "file1.json");
+        Path file2 = Paths.get("src", "test", "resources", "fixtures", "nested", "file2.json");
+        String actual = Differ.generate(file1.toString(), file2.toString()).trim();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void gendiffYamlInJsonFormatTest() throws Exception {
+        Path expectedPath = Paths.get("src", "test", "resources", "fixtures", "nested", "expected_json.txt");
+        String expected = Files.readString(expectedPath).trim();
+
+        Path file1 = Paths.get("src", "test", "resources", "fixtures", "nested", "file1.yml");
+        Path file2 = Paths.get("src", "test", "resources", "fixtures", "nested", "file2.yml");
+        String actual = Differ.generate(file1.toString(), file2.toString(), "json").trim();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void gendiffYamlInStylishFormatTest() throws Exception {
         Path expectedPath = Paths.get("src", "test", "resources", "fixtures", "nested", "expected_stylish.txt");
         String expected = Files.readString(expectedPath).trim();
 
@@ -48,13 +84,25 @@ class DifferTest {
     }
 
     @Test
-    void gendiffJsonFormatTest() throws Exception {
-        Path expectedPath = Paths.get("src", "test", "resources", "fixtures", "nested", "expected_json.txt");
+    void gendiffYamlInPlainFormatTest() throws Exception {
+        Path expectedPath = Paths.get("src", "test", "resources", "fixtures", "nested", "expected_plain.txt");
         String expected = Files.readString(expectedPath).trim();
 
-        Path file1 = Paths.get("src", "test", "resources", "fixtures", "nested", "file1.json");
+        Path file1 = Paths.get("src", "test", "resources", "fixtures", "nested", "file1.yml");
         Path file2 = Paths.get("src", "test", "resources", "fixtures", "nested", "file2.yml");
-        String actual = Differ.generate(file1.toString(), file2.toString(), "json").trim();
+        String actual = Differ.generate(file1.toString(), file2.toString(), "plain").trim();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void gendiffYamlInDefaultFormatTest() throws Exception {
+        Path expectedPath = Paths.get("src", "test", "resources", "fixtures", "nested", "expected_stylish.txt");
+        String expected = Files.readString(expectedPath).trim();
+
+        Path file1 = Paths.get("src", "test", "resources", "fixtures", "nested", "file1.yml");
+        Path file2 = Paths.get("src", "test", "resources", "fixtures", "nested", "file2.yml");
+        String actual = Differ.generate(file1.toString(), file2.toString()).trim();
 
         assertEquals(expected, actual);
     }
@@ -84,7 +132,7 @@ class DifferTest {
                 Differ.generate(file1, file2)
         );
 
-        assertTrue(e.getMessage().contains("Unsupported file format"));
+        assertTrue(e.getMessage().contains("Unsupported data format"));
     }
 
     @Test

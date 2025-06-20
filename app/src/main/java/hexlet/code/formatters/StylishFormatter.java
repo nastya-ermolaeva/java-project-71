@@ -1,6 +1,7 @@
 package hexlet.code.formatters;
 
-import hexlet.code.Difference;
+import hexlet.code.diff.Difference;
+import hexlet.code.diff.Status;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -22,10 +23,10 @@ public final class StylishFormatter {
             var status = diff.getStatus();
 
             switch (status) {
-                case "unchanged" -> lines.add("    " + key + ": " + intoString(oldValue));
-                case "removed" -> lines.add("  - " + key + ": " + intoString(oldValue));
-                case "added" -> lines.add("  + " + key + ": " + intoString(newValue));
-                case "changed" -> {
+                case Status.UNCHANGED -> lines.add("    " + key + ": " + intoString(oldValue));
+                case Status.REMOVED -> lines.add("  - " + key + ": " + intoString(oldValue));
+                case Status.ADDED -> lines.add("  + " + key + ": " + intoString(newValue));
+                case Status.CHANGED -> {
                     lines.add("  - " + key + ": " + intoString(oldValue));
                     lines.add("  + " + key + ": " + intoString(newValue));
                 }
