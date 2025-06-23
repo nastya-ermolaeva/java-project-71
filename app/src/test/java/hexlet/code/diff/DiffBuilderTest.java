@@ -9,17 +9,19 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 class DiffBuilderTest {
 
-    private static final int MAP_SIZE = 3;
+    private static final int MAP_SIZE = 4;
 
     @Test
     void buildMapOfDiffsTest() {
         Map<String, Object> data1 = Map.of(
                 "apple", "sugar",
-                "banana", true
+                "banana", true,
+                "milk", "warm"
         );
         Map<String, Object> data2 = Map.of(
                 "banana", false,
-                "cream", "butter"
+                "cream", "butter",
+                "milk", "warm"
         );
 
         Map<String, Difference> actual = DiffBuilder.build(data1, data2);
@@ -31,18 +33,28 @@ class DiffBuilderTest {
         assertNull(diffApple.getNewValue());
         assertTrue(diffApple.hasOldKey());
         assertFalse(diffApple.hasNewKey());
+        assertEquals(Status.REMOVED, diffApple.getStatus());
 
         Difference diffBanana = actual.get("banana");
         assertEquals(true, diffBanana.getOldValue());
         assertEquals(false, diffBanana.getNewValue());
         assertTrue(diffBanana.hasOldKey());
         assertTrue(diffBanana.hasNewKey());
+        assertEquals(Status.CHANGED, diffBanana.getStatus());
 
         Difference diffCream = actual.get("cream");
         assertNull(diffCream.getOldValue());
         assertEquals("butter", diffCream.getNewValue());
         assertFalse(diffCream.hasOldKey());
         assertTrue(diffCream.hasNewKey());
+        assertEquals(Status.ADDED, diffCream.getStatus());
+
+        Difference diffMilk = actual.get("milk");
+        assertEquals("warm", diffMilk.getOldValue());
+        assertEquals("warm", diffMilk.getNewValue());
+        assertTrue(diffMilk.hasOldKey());
+        assertTrue(diffMilk.hasNewKey());
+        assertEquals(Status.UNCHANGED, diffMilk.getStatus());
     }
 
     @Test

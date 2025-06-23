@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Map;
 import java.util.LinkedHashMap;
 import hexlet.code.diff.Difference;
+import hexlet.code.diff.Status;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -15,7 +16,7 @@ class FormatterTest {
     @Test
     void testStylishFormatter() throws Exception {
         Map<String, Difference> diffs = new LinkedHashMap<>();
-        diffs.put("key", new Difference("apple", "pear", true, true));
+        diffs.put("key", new Difference("apple", "pear", true, true, Status.CHANGED));
 
         String expected = StylishFormatter.format(diffs);
         String actual = Formatter.format(diffs, "stylish");
@@ -26,7 +27,7 @@ class FormatterTest {
     @Test
     void testPlainFormatter() throws Exception {
         Map<String, Difference> diffs = new LinkedHashMap<>();
-        diffs.put("key", new Difference("watermelon", "melon", true, true));
+        diffs.put("key", new Difference("watermelon", "melon", true, true, Status.CHANGED));
 
         String expected = PlainFormatter.format(diffs);
         String actual = Formatter.format(diffs, "plain");
@@ -37,7 +38,7 @@ class FormatterTest {
     @Test
     void testJsonFormatter() throws Exception {
         Map<String, Difference> diffs = new LinkedHashMap<>();
-        diffs.put("key", new Difference("sugar", "salt", true, true));
+        diffs.put("key", new Difference("sugar", "salt", true, true, Status.CHANGED));
 
         String expected = JsonFormatter.format(diffs);
         String actual = Formatter.format(diffs, "json");
@@ -48,7 +49,7 @@ class FormatterTest {
     @Test
     void testInvalidFormat() {
         Map<String, Difference> diffs = new LinkedHashMap<>();
-        diffs.put("key", new Difference("bread", "milk", true, true));
+        diffs.put("key", new Difference("bread", "milk", true, true, Status.CHANGED));
 
         Exception e = assertThrows(IllegalArgumentException.class, () -> {
             Formatter.format(diffs, "invalid");

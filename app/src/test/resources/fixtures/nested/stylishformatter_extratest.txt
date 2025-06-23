@@ -1,0 +1,8 @@
+{
+  -   spaced: one
+  +   spaced: two
+  - CAPS: true
+  + CAPS: false
+  - key: 12
+  + key: 12
+}

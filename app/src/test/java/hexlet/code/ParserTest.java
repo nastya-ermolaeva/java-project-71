@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.Map;
 import java.util.List;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.Files;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -14,16 +17,9 @@ class ParserTest {
 
     @Test
     void parseJsonTestSuccess() throws IOException {
-        String json = """
-               {
-                  "host": "hexlet.io",
-                  "settings": {
-                    "timeout": 50,
-                    "proxy": "123.234.53.22"
-                  },
-                  "features": ["follow", "verbose"]
-               }
-            """;
+
+        Path jsonPath = Paths.get("src", "test", "resources", "fixtures", "nested", "json_parsertest.txt");
+        String json = Files.readString(jsonPath).trim();
 
         Map<String, Object> result = Parser.parse(json, "json");
 
@@ -46,15 +42,9 @@ class ParserTest {
 
     @Test
     void parseYamlTestSuccess() throws IOException {
-        String yaml = """
-                host: hexlet.io
-                settings:
-                  timeout: 50
-                  proxy: 123.234.53.22
-                features:
-                  - follow
-                  - verbose
-                """;
+
+        Path yamlPath = Paths.get("src", "test", "resources", "fixtures", "nested", "yaml_parsertest.txt");
+        String yaml = Files.readString(yamlPath).trim();
 
         Map<String, Object> result = Parser.parse(yaml, "yml");
 

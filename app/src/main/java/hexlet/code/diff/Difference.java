@@ -1,6 +1,5 @@
 package hexlet.code.diff;
 
-import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -9,12 +8,14 @@ public final class Difference {
     private final Object newValue;
     private final boolean hasOldKey;
     private final boolean hasNewKey;
+    private final String status;
 
-    public Difference(Object oldValue, Object newValue, boolean hasOldKey, boolean hasNewKey) {
+    public Difference(Object oldValue, Object newValue, boolean hasOldKey, boolean hasNewKey, String status) {
         this.oldValue = oldValue;
         this.newValue = newValue;
         this.hasOldKey = hasOldKey;
         this.hasNewKey = hasNewKey;
+        this.status = status;
     }
 
     public Object getOldValue() {
@@ -37,18 +38,6 @@ public final class Difference {
 
     @JsonProperty("status")
     public String getStatus() {
-        if (!hasOldKey && hasNewKey) {
-            return Status.ADDED;
-        }
-
-        if (hasOldKey && !hasNewKey) {
-            return Status.REMOVED;
-        }
-
-        if (Objects.equals(oldValue, newValue)) {
-            return Status.UNCHANGED;
-        }
-
-        return Status.CHANGED;
+        return status;
     }
 }

@@ -1,0 +1,3 @@
+Property 'nullTest' was updated. From null to 'nonNull'
+Property 'numbers' was updated. From 10 to '10'
+Property 'removedKey' was removed
