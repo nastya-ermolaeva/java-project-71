@@ -29,13 +29,13 @@ public final class DiffBuilder {
 
             String status;
             if (!oldKeyExists && newKeyExists) {
-                status = Status.ADDED;
+                status = Difference.ADDED;
             } else if (oldKeyExists && !newKeyExists) {
-                status = Status.REMOVED;
+                status = Difference.REMOVED;
             } else if (Objects.equals(value1, value2)) {
-                status = Status.UNCHANGED;
+                status = Difference.UNCHANGED;
             } else {
-                status = Status.CHANGED;
+                status = Difference.CHANGED;
             }
 
             diffs.put(key, new Difference(value1, value2, oldKeyExists, newKeyExists, status));

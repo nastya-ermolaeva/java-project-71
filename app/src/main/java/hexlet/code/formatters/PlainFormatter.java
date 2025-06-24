@@ -1,7 +1,6 @@
 package hexlet.code.formatters;
 
 import hexlet.code.diff.Difference;
-import hexlet.code.diff.Status;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
@@ -23,11 +22,11 @@ public final class PlainFormatter {
             var newValue = intoPlainString(diff.getNewValue());
 
             switch (status) {
-                case Status.ADDED -> lines.add("Property '" + key + "' was added with value: " + newValue);
-                case Status.REMOVED -> lines.add("Property '" + key + "' was removed");
-                case Status.CHANGED -> lines.add("Property '" + key + "' was updated. From "
+                case Difference.ADDED -> lines.add("Property '" + key + "' was added with value: " + newValue);
+                case Difference.REMOVED -> lines.add("Property '" + key + "' was removed");
+                case Difference.CHANGED -> lines.add("Property '" + key + "' was updated. From "
                         + oldValue + " to " + newValue);
-                case Status.UNCHANGED -> { } // doesn't need to be printed on the screen
+                case Difference.UNCHANGED -> { } // doesn't need to be printed on the screen
                 default -> throw new IllegalStateException("Unexpected status: " + status);
             }
         }

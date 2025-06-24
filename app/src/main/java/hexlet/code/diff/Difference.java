@@ -10,6 +10,11 @@ public final class Difference {
     private final boolean hasNewKey;
     private final String status;
 
+    public static final String ADDED = "added";
+    public static final String REMOVED = "removed";
+    public static final String CHANGED = "changed";
+    public static final String UNCHANGED = "unchanged";
+
     public Difference(Object oldValue, Object newValue, boolean hasOldKey, boolean hasNewKey, String status) {
         this.oldValue = oldValue;
         this.newValue = newValue;

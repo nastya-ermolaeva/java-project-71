@@ -11,7 +11,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.io.IOException;
 import hexlet.code.diff.Difference;
-import hexlet.code.diff.Status;
 
 class PlainFormatterTest {
 
@@ -34,26 +33,26 @@ class PlainFormatterTest {
 
         Map<String, Difference> diffs = new TreeMap<>();
 
-        diffs.put("chars1", new Difference(CHARS1_VAL, CHARS1_VAL, true, true, Status.UNCHANGED));
-        diffs.put("chars2", new Difference(List.of('d', 'e', 'f'), false, true, true, Status.CHANGED));
-        diffs.put("checked", new Difference(false, true, true, true, Status.CHANGED));
-        diffs.put("default", new Difference(null, List.of("value1", "value2"), true, true, Status.CHANGED));
-        diffs.put("id", new Difference(ID_OLD, null, true, true, Status.CHANGED));
-        diffs.put("key1", new Difference("value1", null, true, false, Status.REMOVED));
-        diffs.put("key2", new Difference(null, "value2", false, true, Status.ADDED));
-        diffs.put("numbers1", new Difference(NUMBERS1_VAL, NUMBERS1_VAL, true, true, Status.UNCHANGED));
-        diffs.put("numbers2", new Difference(NUMBERS2_OLD, NUMBERS2_NEW, true, true, Status.CHANGED));
-        diffs.put("numbers3", new Difference(NUMBERS3_OLD, null, true, false, Status.REMOVED));
-        diffs.put("numbers4", new Difference(null, NUMBERS4_NEW, false, true, Status.ADDED));
+        diffs.put("chars1", new Difference(CHARS1_VAL, CHARS1_VAL, true, true, Difference.UNCHANGED));
+        diffs.put("chars2", new Difference(List.of('d', 'e', 'f'), false, true, true, Difference.CHANGED));
+        diffs.put("checked", new Difference(false, true, true, true, Difference.CHANGED));
+        diffs.put("default", new Difference(null, List.of("value1", "value2"), true, true, Difference.CHANGED));
+        diffs.put("id", new Difference(ID_OLD, null, true, true, Difference.CHANGED));
+        diffs.put("key1", new Difference("value1", null, true, false, Difference.REMOVED));
+        diffs.put("key2", new Difference(null, "value2", false, true, Difference.ADDED));
+        diffs.put("numbers1", new Difference(NUMBERS1_VAL, NUMBERS1_VAL, true, true, Difference.UNCHANGED));
+        diffs.put("numbers2", new Difference(NUMBERS2_OLD, NUMBERS2_NEW, true, true, Difference.CHANGED));
+        diffs.put("numbers3", new Difference(NUMBERS3_OLD, null, true, false, Difference.REMOVED));
+        diffs.put("numbers4", new Difference(null, NUMBERS4_NEW, false, true, Difference.ADDED));
 
         Map<String, Object> map = new LinkedHashMap<>();
         map.put("nestedKey", "value");
         map.put("isNested", true);
-        diffs.put("obj1", new Difference(null, map, false, true, Status.ADDED));
+        diffs.put("obj1", new Difference(null, map, false, true, Difference.ADDED));
 
-        diffs.put("setting1", new Difference("Some value", "Another value", true, true, Status.CHANGED));
-        diffs.put("setting2", new Difference(SETTING2_OLD, SETTING2_NEW, true, true, Status.CHANGED));
-        diffs.put("setting3", new Difference(true, "none", true, true, Status.CHANGED));
+        diffs.put("setting1", new Difference("Some value", "Another value", true, true, Difference.CHANGED));
+        diffs.put("setting2", new Difference(SETTING2_OLD, SETTING2_NEW, true, true, Difference.CHANGED));
+        diffs.put("setting3", new Difference(true, "none", true, true, Difference.CHANGED));
 
         String actual = PlainFormatter.format(diffs);
         assertEquals(expected.trim(), actual.trim());
@@ -67,9 +66,9 @@ class PlainFormatterTest {
 
         Map<String, Difference> diffs = new TreeMap<>();
 
-        diffs.put("numbers", new Difference(FOR_EXTRA, "10", true, true, Status.CHANGED));
-        diffs.put("nullTest", new Difference(null, "nonNull", true, true, Status.CHANGED));
-        diffs.put("removedKey", new Difference("gone", null, true, false, Status.REMOVED));
+        diffs.put("numbers", new Difference(FOR_EXTRA, "10", true, true, Difference.CHANGED));
+        diffs.put("nullTest", new Difference(null, "nonNull", true, true, Difference.CHANGED));
+        diffs.put("removedKey", new Difference("gone", null, true, false, Difference.REMOVED));
 
         String actual = PlainFormatter.format(diffs).trim();
         assertEquals(expected, actual);

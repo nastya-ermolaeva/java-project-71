@@ -33,28 +33,28 @@ class DiffBuilderTest {
         assertNull(diffApple.getNewValue());
         assertTrue(diffApple.hasOldKey());
         assertFalse(diffApple.hasNewKey());
-        assertEquals(Status.REMOVED, diffApple.getStatus());
+        assertEquals(Difference.REMOVED, diffApple.getStatus());
 
         Difference diffBanana = actual.get("banana");
         assertEquals(true, diffBanana.getOldValue());
         assertEquals(false, diffBanana.getNewValue());
         assertTrue(diffBanana.hasOldKey());
         assertTrue(diffBanana.hasNewKey());
-        assertEquals(Status.CHANGED, diffBanana.getStatus());
+        assertEquals(Difference.CHANGED, diffBanana.getStatus());
 
         Difference diffCream = actual.get("cream");
         assertNull(diffCream.getOldValue());
         assertEquals("butter", diffCream.getNewValue());
         assertFalse(diffCream.hasOldKey());
         assertTrue(diffCream.hasNewKey());
-        assertEquals(Status.ADDED, diffCream.getStatus());
+        assertEquals(Difference.ADDED, diffCream.getStatus());
 
         Difference diffMilk = actual.get("milk");
         assertEquals("warm", diffMilk.getOldValue());
         assertEquals("warm", diffMilk.getNewValue());
         assertTrue(diffMilk.hasOldKey());
         assertTrue(diffMilk.hasNewKey());
-        assertEquals(Status.UNCHANGED, diffMilk.getStatus());
+        assertEquals(Difference.UNCHANGED, diffMilk.getStatus());
     }
 
     @Test
